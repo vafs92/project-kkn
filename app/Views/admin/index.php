@@ -6,7 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Penduduk - Admin Dashboard</title>
     <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        .table-scroll {
+            max-height: 500px;
+            overflow-y: auto;
+            display: block;
+        }
+
+        .table {
+            width: 100%;
+            table-layout: fixed;
+        }
         .sidebar {
             position: fixed;
             top: 0;
@@ -58,7 +69,8 @@
 
         <div class="container mt-4">
             <h2>Data Penduduk</h2>
-            <table class="table table-bordered">
+            <div class="table-scroll">
+                <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Nama</th>
@@ -96,7 +108,46 @@
                     <?php endif; ?>
                 </tbody>
             </table>
+            </div>
         </div>
+
+        <div class="container mt-4">
+            <h2>Data Artikel</h2>
+            <div class="table-scroll">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Penulis</th>
+                            <th scope="col">Tanggal Penulisan</th>
+                            <th scope="col">Judul Artikel</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($artikel) && is_array($artikel)) : ?>
+                            <?php foreach ($artikel as $item) : ?>
+                                <tr>
+                                    <td><?= esc($item['penulis']); ?></td>
+                                    <td><?= esc($item['tgl_tulis']); ?></td>
+                                    <td><?= esc($item['judul']); ?></td>
+                                    <td>
+                                        <a href="/admin/edit_artikel/<?= esc($item['id']); ?>" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="/admin/delete_artikel/<?= esc($item['id']); ?>" method="post" style="display:inline-block;">
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="7">Tidak ada data</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
     </div>
 
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
