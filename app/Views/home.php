@@ -23,11 +23,24 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="assets/css/profil.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .table-scroll {
+      max-height: 500px;
+      overflow-y: auto;
+      display: block;
+    }
+
+    .table {
+      width: 100%;
+      table-layout: fixed;
+    }
+  </style>
 </head>
 
 <body class="index-page">
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+  <header id="header" class="header d-flex align-items-center fixed-top justify-content-center">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-center">
 
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <img src="assets/img/logo new.png" alt="" class="logo">
@@ -613,8 +626,8 @@
   <div class="container" data-aos="fade-up" data-aos-delay="100">
 
     <div class="row g-0 clients-wrap">
-      <div class="col">
-
+          <div class="table-scroll">
+            <table class="table table-bordered">
         <table class="table table-bordered">
           <thead class="thead-dark">
             <tr>
@@ -648,7 +661,7 @@
 
       </div>
     </div>
-    
+            </div>
   </div>
     
 </section><!-- /Data Penduduk Section -->
