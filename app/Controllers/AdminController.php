@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\LokasiWisataModel;
 use App\Models\PendudukModel;
+use App\Models\ArtikelModel;
 use CodeIgniter\Controller;
 
 class AdminController extends Controller
@@ -12,10 +13,13 @@ class AdminController extends Controller
     {
         $modelPenduduk = new PendudukModel();
         $modelWisata = new LokasiWisataModel();
+        $modelArtikel = new ArtikelModel();
+
 
         $data = [
             'penduduk' => $modelPenduduk->findAll(),
             'wisata' => $modelWisata->findAll()
+            'artikel' => $modelArtikel->findAll()
         ];
 
         echo view('admin/dashboard', $data);
@@ -85,6 +89,7 @@ class AdminController extends Controller
 
         return redirect()->to('/admin');
     }
+
       public function createPenduduk()
     {
         return view('admin/create_penduduk');
@@ -132,6 +137,27 @@ class AdminController extends Controller
     {
         $model = new PendudukModel();
         $model->delete($id);
+
+        return redirect()->to('/admin');
+    }
+
+    public function create_artikel()
+    {
+        return view('admin/create_artikel');
+    }
+
+    public function store_artikel()
+    {
+        $model = new ArtikelModel();
+
+        $data = [
+            'penulis' => $this->request->getPost('penulis'),
+            'tgl_tulis' => $this->request->getPost('tgl_tulis'),
+            'judul' => $this->request->getPost('judul'),
+            'isi' => $this->request->getPost('isi'),
+        ];
+
+        $model->save($data);
 
         return redirect()->to('/admin');
     }
